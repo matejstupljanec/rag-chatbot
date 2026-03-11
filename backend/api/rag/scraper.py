@@ -20,7 +20,16 @@ class Scraper:
         return response.content
 
     def clean_soup(self, soup):
-        irrelevant_tags = ["header", "footer", "nav", "script", "style", "meta", "link"]
+        irrelevant_tags = [
+            "header",
+            "footer",
+            "nav",
+            "script",
+            "style",
+            "meta",
+            "link",
+            "title",
+        ]
 
         for tag in soup(irrelevant_tags):
             tag.decompose()
