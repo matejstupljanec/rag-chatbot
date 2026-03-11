@@ -1,13 +1,14 @@
 from dotenv import load_dotenv
 from embedding import Embedding
 from llm import LLM
+from scraper import Scraper
 from vector_database import VectorDB
 
 load_dotenv()
 
 
 def main():
-    rag("Where are cats?")
+    scrape_page("https://www.fer.unizg.hr/studiji/prijediplomski_studij")
 
 
 def create_embedding():
@@ -33,6 +34,11 @@ def call_LLM(question, docs):
 def ask_LLM(question):
     model = LLM()
     print(model.ask(question).content)
+
+
+def scrape_page(url):
+    scraped_text = Scraper(url).extract_text()
+    print(scraped_text)
 
 
 if __name__ == "__main__":
