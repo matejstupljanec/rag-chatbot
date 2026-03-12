@@ -1,14 +1,11 @@
-from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-load_dotenv()
 
-
-class LLM:
+class LLMClient:
     def __init__(self):
         self.model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-    def ask(self, question):
+    def invoke(self, question: str):
         return self.model.invoke(question)
 
     def template(self, question, docs):
