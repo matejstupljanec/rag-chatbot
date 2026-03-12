@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 
 class Scraper:
-    def __init__(self, url):
+    def __init__(self, url: str):
         self.url = url
 
     def extract_text(self):
@@ -19,7 +19,7 @@ class Scraper:
         response = requests.get(self.url)
         return response.content
 
-    def clean_soup(self, soup):
+    def clean_soup(self, soup: BeautifulSoup):
         irrelevant_tags = [
             "header",
             "footer",
@@ -52,9 +52,9 @@ class Scraper:
 
         return soup
 
-    def text_soup(self, soup):
+    def text_soup(self, soup: BeautifulSoup):
         text = soup.get_text(separator=" ", strip=True)
         return text
 
-    def title(self, soup):
+    def title(self, soup: BeautifulSoup):
         return soup.title.string

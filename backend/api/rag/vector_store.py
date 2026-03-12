@@ -1,16 +1,12 @@
 import os
 
-from dotenv import load_dotenv
+from embedding_model import EmbeddingModel
 from langchain_core.documents import Document
 from langchain_postgres import PGVector
 
-from embedding import Embedding
 
-load_dotenv()
-
-
-class VectorDB:
-    def __init__(self):
+class VectorStore:
+    def __init__(self, embedding: EmbeddingModel):
         db_user = os.environ["DB_USERNAME"]
         db_pass = os.environ["DB_PASSWORD"]
         db_host = os.environ["DB_HOST"]
@@ -20,16 +16,14 @@ class VectorDB:
         connection = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
         collection_name = "my_docs"
 
-        embeddings = Embedding().model
-
         self.db = PGVector(
-            embeddings=embeddings,
+            embeddings=embedding.model,
             collection_name=collection_name,
             connection=connection,
         )
 
-    def search(self, query):
-        return self.db.similarity_search_with_score(query=query, k=3)
+    def similarity_search(self, question: str):
+        return self.db.similarity_search_with_score(query=question, k=3)
 
     def add_documents(self):
         docs = self.documents()

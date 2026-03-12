@@ -1,12 +1,9 @@
-from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-load_dotenv()
 
-
-class Embedding:
+class EmbeddingModel:
     def __init__(self):
         self.model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
-    def create(self, query):
-        return self.model.embed_query(query)
+    def embed(self, text: str):
+        return self.model.embed_query(text)
