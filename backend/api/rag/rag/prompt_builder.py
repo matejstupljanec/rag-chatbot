@@ -17,10 +17,7 @@ class PromptBuilder:
 
     def build_prompt(self, question: str, docs: list[Document]):
         return self.prompt_template.invoke(
-            {
-                "context": self.format_docs(docs), 
-                "question": question
-            }
+            {"context": self.format_docs(docs), "question": question}
         )
 
     def format_docs(self, docs: list[Document]):

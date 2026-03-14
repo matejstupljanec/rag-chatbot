@@ -6,7 +6,7 @@ class Scraper:
         soup = BeautifulSoup(html, "html.parser")
 
         soup = self.clean_soup(soup)
-        
+
         text = self.text_soup(soup)
         return text
 

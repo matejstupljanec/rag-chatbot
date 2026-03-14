@@ -1,9 +1,8 @@
 import os
 
-from embedding_model import EmbeddingModel
-from langchain_postgres import PGVector
+from core.embedding_model import EmbeddingModel
 from langchain_core.documents import Document
-
+from langchain_postgres import PGVector
 
 
 class VectorStore:

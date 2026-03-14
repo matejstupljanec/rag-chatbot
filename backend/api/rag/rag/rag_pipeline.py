@@ -1,7 +1,8 @@
 from langchain_core.documents import Document
-from llm_client import LLMClient
-from prompt_builder import PromptBuilder
-from vector_store import VectorStore
+
+from core.llm_client import LLMClient
+from core.vector_store import VectorStore
+from rag.prompt_builder import PromptBuilder
 
 
 class RAGPipeline:

@@ -1,11 +1,11 @@
 from datetime import datetime
 
-from fer_urls import FER_URLS
+from core.vector_store import VectorStore
+from data_ingestion.fer_urls import FER_URLS
 from langchain_core.documents import Document
-from scraper import Scraper
-from splitter import Splitter
-from url_fetcher import URLFetcher
-from vector_store import VectorStore
+from data_ingestion.scraper import Scraper
+from data_ingestion.splitter import Splitter
+from data_ingestion.url_fetcher import URLFetcher
 
 
 class IngestionPipeline:
@@ -26,7 +26,7 @@ class IngestionPipeline:
             chunks = self.splitter.split_documents([doc])
             docs.extend(chunks)
 
-        self.db.add_documents(docs)
+        # self.db.add_documents(docs)
 
     def generate_document(self, text: str, url: str):
         return Document(
