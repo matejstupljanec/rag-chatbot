@@ -1,23 +1,12 @@
-import requests
 from bs4 import BeautifulSoup
 
 
 class Scraper:
-    def __init__(self, url: str):
-        self.url = url
-
-    def extract_text(self):
-        html = self.html_response()
-
+    def scrape(self, html: str):
         soup = BeautifulSoup(html, "html.parser")
         soup = self.clean_soup(soup)
-
         text = self.text_soup(soup)
         return text
-
-    def html_response(self):
-        response = requests.get(self.url)
-        return response.content
 
     def clean_soup(self, soup: BeautifulSoup):
         irrelevant_tags = [
