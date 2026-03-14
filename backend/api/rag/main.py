@@ -15,7 +15,7 @@ def main():
     rag_pipeline = RAGPipeline(db, llm)
     # ingestion_pipeline = IngestionPipeline(db)
 
-    answer = rag_pipeline.run("Koliko ukupno godina traju faks", print_retrieved_docs=True)
+    answer = rag_pipeline.run("Koliko ukupno godina traje faks", print_retrieved_docs=True)
     print(answer)
 
     # ingestion_pipeline = IngestionPipeline(db)

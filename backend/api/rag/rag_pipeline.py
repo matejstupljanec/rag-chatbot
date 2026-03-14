@@ -1,8 +1,7 @@
+from langchain_core.documents import Document
 from llm_client import LLMClient
 from prompt_builder import PromptBuilder
 from vector_store import VectorStore
-from langchain_core.documents import Document
-
 
 
 class RAGPipeline:
@@ -14,12 +13,13 @@ class RAGPipeline:
     def run(self, question: str, print_retrieved_docs=False) -> str:
         docs = self.db.similarity_search(question)
 
-        if print_retrieved_docs: 
+        if print_retrieved_docs:
             self.print_retrieved_documents(docs)
 
         prompt = self.prompt_builder.build_prompt(question, docs)
-        return self.llm.invoke(prompt).content
-    
+
+        return self.llm.invoke(prompt)
+
     def print_retrieved_documents(self, docs: list[Document]):
         for doc in docs:
             print()
