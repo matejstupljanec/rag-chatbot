@@ -4,7 +4,9 @@ from bs4 import BeautifulSoup
 class Scraper:
     def scrape(self, html: str):
         soup = BeautifulSoup(html, "html.parser")
+
         soup = self.clean_soup(soup)
+        
         text = self.text_soup(soup)
         return text
 
@@ -43,6 +45,7 @@ class Scraper:
 
     def text_soup(self, soup: BeautifulSoup):
         text = soup.get_text(separator=" ", strip=True)
+        text = text.replace("\xa0", " ")
         return text
 
     def title(self, soup: BeautifulSoup):
