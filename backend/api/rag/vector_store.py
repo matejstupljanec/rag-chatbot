@@ -24,7 +24,7 @@ class VectorStore:
         )
 
     def similarity_search(self, question: str):
-        return self.db.similarity_search_with_score(query=question, k=3)
+        return self.db.similarity_search(query=question, k=3)
 
     def add_documents(self, docs: list[Document]):
         self.db.add_documents(docs)

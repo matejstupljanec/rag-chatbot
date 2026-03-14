@@ -6,4 +6,6 @@ class LLMClient:
         self.model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
     def invoke(self, question: str):
-        return self.model.invoke(question)
+        # answer = self.model.invoke(question).content
+        answer = "odgovor"
+        return answer
