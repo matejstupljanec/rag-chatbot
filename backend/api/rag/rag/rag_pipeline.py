@@ -1,8 +1,7 @@
 from langchain_core.documents import Document
-
-from core.llm_client import LLMClient
-from core.vector_store import VectorStore
-from rag.prompt_builder import PromptBuilder
+from api.rag.core.llm_client import LLMClient
+from api.rag.core.vector_store import VectorStore
+from api.rag.rag.prompt_builder import PromptBuilder
 
 
 class RAGPipeline:
@@ -20,6 +19,7 @@ class RAGPipeline:
         prompt = self.prompt_builder.build_prompt(question, docs)
 
         return self.llm.invoke(prompt)
+        #return 'odgovor'
 
     def print_retrieved_documents(self, docs: list[Document]):
         for doc in docs:

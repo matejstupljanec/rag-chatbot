@@ -1,11 +1,12 @@
 from datetime import datetime
 
-from core.vector_store import VectorStore
-from data_ingestion.fer_urls import FER_URLS
 from langchain_core.documents import Document
-from data_ingestion.scraper import Scraper
-from data_ingestion.splitter import Splitter
-from data_ingestion.url_fetcher import URLFetcher
+
+from api.rag.core.vector_store import VectorStore
+from api.rag.data_ingestion.fer_urls import FER_URLS
+from api.rag.data_ingestion.scraper import Scraper
+from api.rag.data_ingestion.splitter import Splitter
+from api.rag.data_ingestion.url_fetcher import URLFetcher
 
 
 class IngestionPipeline:
