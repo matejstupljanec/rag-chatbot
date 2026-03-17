@@ -5,7 +5,17 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 class Splitter:
     def __init__(self):
         self.splitter = RecursiveCharacterTextSplitter(
-            chunk_size=500, chunk_overlap=100
+            chunk_size=500,
+            chunk_overlap=100,
+            separators=[
+                "\n\n",
+                "\n",
+                ". ",
+                ", ",
+                " ",
+                "",
+            ],
+            keep_separator=False
         )
 
     def split_text(self, text: str):
