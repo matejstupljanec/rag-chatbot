@@ -1,9 +1,8 @@
-from core.embedding_model import EmbeddingModel
-from core.llm_client import LLMClient
-from core.vector_store import VectorStore
-from data_ingestion.ingestion_pipeline import IngestionPipeline
 from dotenv import load_dotenv
-from rag.rag_pipeline import RAGPipeline
+from api.rag.core.embedding_model import EmbeddingModel
+from api.rag.core.llm_client import LLMClient
+from api.rag.core.vector_store import VectorStore
+from api.rag.rag.rag_pipeline import RAGPipeline
 
 load_dotenv()
 
@@ -16,7 +15,7 @@ def main():
     # ingestion_pipeline = IngestionPipeline(db)
 
     answer = rag_pipeline.run(
-        "Koliko ukupno godina traje faks", print_retrieved_docs=True
+        "Koliko ukupno godina traje diplomski", print_retrieved_docs=True
     )
     print(answer)
 

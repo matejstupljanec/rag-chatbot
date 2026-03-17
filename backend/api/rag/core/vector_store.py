@@ -1,8 +1,9 @@
 import os
 
-from core.embedding_model import EmbeddingModel
 from langchain_core.documents import Document
 from langchain_postgres import PGVector
+
+from api.rag.core.embedding_model import EmbeddingModel
 
 
 class VectorStore:

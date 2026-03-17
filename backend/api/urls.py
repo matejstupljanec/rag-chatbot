@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import ApiView, HealthView
+from .views import ApiView, HealthView, QuestionsView
 
 app_name = "api"
 
 urlpatterns = [
-    path("", ApiView.as_view(), name=""),
-    path("health/", HealthView.as_view(), name="health")
+    path("", ApiView.as_view()),
+    path("health", HealthView.as_view()),
+    path("questions", QuestionsView.as_view())
 ]
