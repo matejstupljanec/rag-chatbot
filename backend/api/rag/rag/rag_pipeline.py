@@ -18,8 +18,8 @@ class RAGPipeline:
 
         prompt = self.prompt_builder.build_prompt(question, docs)
 
-        return self.llm.invoke(prompt)
-        #return 'odgovor'
+        #return self.llm.invoke(prompt)
+        return 'odgovor'
 
     def print_retrieved_documents(self, docs: list[Document]):
         for doc in docs:
