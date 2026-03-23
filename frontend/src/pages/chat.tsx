@@ -58,7 +58,7 @@ export default function Chat() {
 
             </div>
 
-            <div className="border p-5 m-2">
+            <div className="border p-5 m-2 flex justify-center">
                 <form onSubmit={handleQuestionSubmit}>
                     <input
                         type="text"
