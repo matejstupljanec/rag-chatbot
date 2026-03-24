@@ -18,9 +18,13 @@ class User(AbstractBaseUser):
 
 
 class Conversation(models.Model):
-    title = models.CharField()
+    name = models.CharField()
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="conversations"
+        User,
+        on_delete=models.CASCADE,
+        related_name="conversations",
+        null=True,
+        blank=True,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

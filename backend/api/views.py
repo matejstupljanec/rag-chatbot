@@ -5,7 +5,7 @@ from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializers import MessageSerializer
+from .serializers import ConversationSerializer, MessageSerializer
 
 
 class ApiView(APIView):
@@ -24,6 +24,19 @@ class HealthView(APIView):
         return Response(data)
 
 
+class ConversationsView(APIView):
+    def post(self, request):
+        serializer = ConversationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data, status=201)
+    
+    def patch(self, request, pk):
+        return Response()
+
+
 class MessagesView(APIView):
     def post(self, request):
         serializer = MessageSerializer(data=request.data)
@@ -38,5 +51,4 @@ class MessagesView(APIView):
         message.answered_at = timezone.now()
         message.save()
 
-        response = MessageSerializer(message)
-        return Response(response.data)
+        return Response(MessageSerializer(message).data, status=201)
