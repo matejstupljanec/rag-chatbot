@@ -38,7 +38,11 @@ class Message(models.Model):
     failed_at = models.DateTimeField(null=True, blank=True)
     sources = models.JSONField(null=True, blank=True)
     conversation = models.ForeignKey(
-        Conversation, on_delete=models.CASCADE, related_name="messages"
+        Conversation,
+        on_delete=models.CASCADE,
+        related_name="messages",
+        null=True,
+        blank=True,
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

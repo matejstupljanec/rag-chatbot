@@ -17,7 +17,7 @@ export default function Chat() {
 
         console.log(question)
 
-        const response = await fetch(`${apiBaseUrl}/api/questions`, {
+        const response = await fetch(`${apiBaseUrl}/api/messages`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

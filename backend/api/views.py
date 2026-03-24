@@ -1,10 +1,11 @@
 from datetime import datetime
 
+from django.apps import apps
+from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from api.services.rag_service import RAGService
 
-# Create your views here.
+from .serializers import MessageSerializer
 
 
 class ApiView(APIView):
@@ -23,9 +24,19 @@ class HealthView(APIView):
         return Response(data)
 
 
-class QuestionsView(APIView):
+class MessagesView(APIView):
     def post(self, request):
-        question = request.data.get("question")
-        answer = RAGService.ask(question)
-        data = {"answer": answer}
-        return Response(data)
+        serializer = MessageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        message = serializer.save()
+
+        api_config = apps.get_app_config("api")
+        answer = api_config.rag_pipeline.run(message.question)
+
+        message.answer = answer
+        message.answered_at = timezone.now()
+        message.save()
+
+        response = MessageSerializer(message)
+        return Response(response.data)
