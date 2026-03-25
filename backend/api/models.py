@@ -31,6 +31,7 @@ class Conversation(models.Model):
 
     class Meta:
         db_table = "conversations"
+        ordering = ["-id"]
 
 
 class Message(models.Model):
