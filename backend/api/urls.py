@@ -1,13 +1,21 @@
 from django.urls import path
 
-from .views import ApiView, HealthView, MessagesView, ConversationsView, ConversationView
+from .views import (
+    ApiView,
+    ConversationsView,
+    ConversationView,
+    HealthView,
+    MessagesView,
+    MessageView,
+)
 
 app_name = "api"
 
 urlpatterns = [
     path("", ApiView.as_view()),
     path("health", HealthView.as_view()),
-    path("messages", MessagesView.as_view()),
     path("conversations", ConversationsView.as_view()),
     path("conversations/<int:id>", ConversationView.as_view()),
+    path("conversations/<int:conversation_id>/messages", MessagesView.as_view()),
+    path("conversations/<int:conversation_id>/messages/<int:message_id>", MessageView.as_view()),
 ]

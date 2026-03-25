@@ -4,6 +4,8 @@ from .models import Conversation, Message
 
 
 class ConversationSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(required=True, allow_blank=False)
+
     class Meta:
         model = Conversation
         fields = [
@@ -20,6 +22,8 @@ class ConversationSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    question = serializers.CharField(required=True, allow_blank=False)
+
     class Meta:
         model = Message
         fields = [
@@ -31,6 +35,7 @@ class MessageSerializer(serializers.ModelSerializer):
             "answered_at",
             "failed_at",
             "sources",
+            "conversation_id",
             "created_at",
             "updated_at",
         ]
@@ -40,6 +45,6 @@ class MessageSerializer(serializers.ModelSerializer):
             "answered_at",
             "failed_at",
             "sources",
-            "created_at",
+            "conversation_idcreated_at",
             "updated_at",
         ]

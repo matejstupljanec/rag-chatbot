@@ -6,7 +6,7 @@ from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Conversation
+from .models import Conversation, Message
 from .serializers import ConversationSerializer, MessageSerializer
 
 
@@ -64,11 +64,20 @@ class ConversationView(APIView):
 
 
 class MessagesView(APIView):
-    def post(self, request):
+    def get(self, request, conversation_id):
+        conversation = get_object_or_404(Conversation, id=conversation_id)
+        messages = conversation.messages
+
+        serializer = MessageSerializer(messages, many=True)
+        return Response(serializer.data, status=200)
+
+    def post(self, request, conversation_id):
+        conversation = get_object_or_404(Conversation, id=conversation_id)
+
         serializer = MessageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        message = serializer.save()
+        message = serializer.save(conversation=conversation)
 
         api_config = apps.get_app_config("api")
         answer = api_config.rag_pipeline.run(message.question)
@@ -77,4 +86,15 @@ class MessagesView(APIView):
         message.answered_at = timezone.now()
         message.save()
 
-        return Response(MessageSerializer(message).data, status=201)
+        serializer = MessageSerializer(message)
+        return Response(serializer.data, status=201)
+
+
+class MessageView(APIView):
+    def get(self, request, conversation_id, message_id):
+        message = get_object_or_404(
+            Message, conversation_id=conversation_id, id=message_id
+        )
+
+        serializer = MessageSerializer(message)
+        return Response(serializer.data, status=200)

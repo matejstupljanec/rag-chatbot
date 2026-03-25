@@ -45,9 +45,7 @@ class Message(models.Model):
     conversation = models.ForeignKey(
         Conversation,
         on_delete=models.CASCADE,
-        related_name="messages",
-        null=True,
-        blank=True,
+        related_name="messages"
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
