@@ -66,7 +66,7 @@ class ConversationView(APIView):
 class MessagesView(APIView):
     def get(self, request, conversation_id):
         conversation = get_object_or_404(Conversation, id=conversation_id)
-        messages = conversation.messages
+        messages = conversation.messages.all()
 
         serializer = MessageSerializer(messages, many=True)
         return Response(serializer.data, status=200)
@@ -92,9 +92,34 @@ class MessagesView(APIView):
 
 class MessageView(APIView):
     def get(self, request, conversation_id, message_id):
-        message = get_object_or_404(
-            Message, conversation_id=conversation_id, id=message_id
-        )
+        conversation = get_object_or_404(Conversation, id=conversation_id)
+        message = get_object_or_404(Message, id=message_id, conversation=conversation)
+
+        serializer = MessageSerializer(message)
+        return Response(serializer.data, status=200)
+
+
+class MessageLikeView(APIView):
+    def patch(self, request, conversation_id, message_id):
+        conversation = get_object_or_404(Conversation, id=conversation_id)
+        message = get_object_or_404(Message, id=message_id, conversation=conversation)
+
+        message.liked_at = timezone.now()
+        message.disliked_at = None
+        message.save()
+
+        serializer = MessageSerializer(message)
+        return Response(serializer.data, status=200)
+
+
+class MessageDislikeView(APIView):
+    def patch(self, request, conversation_id, message_id):
+        conversation = get_object_or_404(Conversation, id=conversation_id)
+        message = get_object_or_404(Message, id=message_id, conversation=conversation)
+
+        message.disliked_at = timezone.now()
+        message.liked_at = None
+        message.save()
 
         serializer = MessageSerializer(message)
         return Response(serializer.data, status=200)

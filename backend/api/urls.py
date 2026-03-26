@@ -7,6 +7,8 @@ from .views import (
     HealthView,
     MessagesView,
     MessageView,
+    MessageLikeView,
+    MessageDislikeView
 )
 
 app_name = "api"
@@ -18,4 +20,6 @@ urlpatterns = [
     path("conversations/<int:id>", ConversationView.as_view()),
     path("conversations/<int:conversation_id>/messages", MessagesView.as_view()),
     path("conversations/<int:conversation_id>/messages/<int:message_id>", MessageView.as_view()),
+    path("conversations/<int:conversation_id>/messages/<int:message_id>/like", MessageLikeView.as_view()),
+    path("conversations/<int:conversation_id>/messages/<int:message_id>/dislike", MessageDislikeView.as_view()),
 ]

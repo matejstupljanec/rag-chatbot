@@ -42,9 +42,12 @@ class MessageSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "answer",
+            "liked_at",
+            "disliked_at",
             "answered_at",
             "failed_at",
             "sources",
-            "conversation_idcreated_at",
+            "conversation_id",
+            "created_at",
             "updated_at",
         ]
