@@ -1,2 +1,3 @@
 from .conversation_serializer import ConversationSerializer
 from .message_serializer import MessageSerializer
+from .page_serializer import PageSerializer
