@@ -9,6 +9,8 @@ from .views import (
     MessageLikeView,
     MessagesView,
     MessageView,
+    PagesView,
+    PageView
 )
 
 app_name = "api"
@@ -22,4 +24,7 @@ urlpatterns = [
     path("conversations/<int:conversation_id>/messages/<int:message_id>", MessageView.as_view()),
     path("conversations/<int:conversation_id>/messages/<int:message_id>/like", MessageLikeView.as_view()),
     path("conversations/<int:conversation_id>/messages/<int:message_id>/dislike", MessageDislikeView.as_view()),
+    path("pages", PagesView.as_view()),
+    path("pages/<int:id>", PageView.as_view())
+
 ]

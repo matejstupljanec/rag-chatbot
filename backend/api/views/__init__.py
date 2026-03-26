@@ -7,3 +7,4 @@ from .messages_view import (
     MessagesView,
     MessageView,
 )
+from .pages_view import PagesView, PageView
