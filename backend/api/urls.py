@@ -5,10 +5,10 @@ from .views import (
     ConversationsView,
     ConversationView,
     HealthView,
+    MessageDislikeView,
+    MessageLikeView,
     MessagesView,
     MessageView,
-    MessageLikeView,
-    MessageDislikeView
 )
 
 app_name = "api"
