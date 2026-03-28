@@ -19,6 +19,10 @@ export default function Chat({ currentConversation }: Props) {
   ) {
     event.preventDefault();
 
+    let userQuestion = question;
+
+    setQuestion("");
+
     const response = await fetch(
       `${apiBaseUrl}/api/conversations/${currentConversation?.id}/messages`,
       {
@@ -28,7 +32,7 @@ export default function Chat({ currentConversation }: Props) {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          question: question,
+          question: userQuestion,
         }),
       },
     );
@@ -36,8 +40,6 @@ export default function Chat({ currentConversation }: Props) {
     const message = await response.json();
 
     setMessages([...messages, message]);
-
-    setQuestion("");
   }
 
   async function getConversationMessages() {
