@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+  --color-darkblue: #111827;
+  --color-lightblue: #22314e;
+}
+
+@plugin 'tailwind-scrollbar';

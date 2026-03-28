@@ -1,9 +1,10 @@
 import Chat from "./pages/chat"
+import Sidebar from "./components/sidebar"
 
 function App() {
   return (
     <div>
-      <Chat />
+      <Sidebar />
     </div>
   )
 }

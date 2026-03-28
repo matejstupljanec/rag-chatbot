@@ -4,7 +4,7 @@ from ..models import Conversation
 
 
 class ConversationSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(required=True, allow_blank=False)
+    name = serializers.CharField(required=False, allow_blank=False)
 
     class Meta:
         model = Conversation

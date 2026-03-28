@@ -15,7 +15,13 @@ class ConversationsView(APIView):
     def post(self, request):
         serializer = ConversationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+
+        if not serializer.validated_data.get("name"):
+            count = Conversation.objects.count()
+            conversation_name = f"Razgovor #{count + 1}"
+            serializer.save(name=conversation_name)
+        else:
+            serializer.save()
 
         return Response(serializer.data, status=201)
 
