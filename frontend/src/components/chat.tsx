@@ -9,8 +9,6 @@ interface Props {
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function Chat({ currentConversation }: Props) {
-  if (!currentConversation) return <div>Greska</div>;
-
   const [question, setQuestion] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -60,14 +58,14 @@ export default function Chat({ currentConversation }: Props) {
   }
 
   useEffect(() => {
-    getConversationMessages();
+    if (currentConversation) getConversationMessages();
   }, [currentConversation]);
 
   return (
     <div>
       <div className="border p-5 m-2">
         {messages.map((message) => (
-          <div className="border p-1 flex flex-col mb-2">
+          <div key={message.id} className="border p-1 flex flex-col mb-2">
             <span className="m-3 p-1 self-end">{message.question}</span>
             <span className="m-3 p-1 self-start">{message.answer}</span>
           </div>
