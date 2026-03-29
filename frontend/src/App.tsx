@@ -1,12 +1,11 @@
-import Chat from "./pages/chat"
-import Sidebar from "./components/sidebar"
+import Home from "./pages/home";
 
 function App() {
   return (
     <div>
-      <Sidebar />
+      <Home />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
